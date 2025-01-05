@@ -23,7 +23,7 @@ const App = () => {
     };
 
     fetchProducts();
-  }, []);
+  });
 
   const addProduct = async (product) => {
     try {
