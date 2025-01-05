@@ -28,7 +28,8 @@ const App = () => {
   const addProduct = async (product) => {
     try {
       const response = await axios.post(`${BASE_URL}/api/products/`, product); 
-      setProducts([...products, response.data]);
+      setProducts([...products, response.data.product]);
+      // setProducts([...products, response.data]);
       toast.success("Product added successfully!");
     } catch (error) {
       console.error("Error adding product:", error);

@@ -122,8 +122,9 @@ const AddProduct = ({ addProduct }) => {
           >
             {formData.images?.map((file, idx) => (
               <img
-                key={idx}
-                src={URL.createObjectURL(file)}
+              key={idx}
+              src={file instanceof File ? URL.createObjectURL(file) : file}
+                // src={URL.createObjectURL(file)}
                 alt={`product-${idx}`}
                 style={{
                   width: "60px",
