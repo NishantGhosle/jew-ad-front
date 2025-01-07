@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import axios from "axios"; // Import axios or use fetch
+import axios from "axios";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import ProductList from "./components/ProductList";
@@ -29,7 +29,6 @@ const App = () => {
     try {
       const response = await axios.post(`${BASE_URL}/api/products/`, product); 
       setProducts([...products, response.data.product]);
-      // setProducts([...products, response.data]);
       toast.success("Product added successfully!");
     } catch (error) {
       console.error("Error adding product:", error);
@@ -83,7 +82,6 @@ const App = () => {
     <>
       {isAuthenticated && <Navbar onLogout={handleLogout} />}
       <Routes>
-        {/* Public Route */}
         <Route
           path="/"
           element={
@@ -94,7 +92,6 @@ const App = () => {
             )
           }
         />
-        {/* Private Routes */}
         {isAuthenticated ? (
           <>
             <Route

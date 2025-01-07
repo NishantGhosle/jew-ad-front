@@ -10,7 +10,7 @@ const StyledLink = styled(Link)(({ theme }) => ({
   fontSize: "1rem",
   fontWeight: "bold",
   "&:hover": {
-    color: "#FFD700", // Gold color for hover effect
+    color: "#FFD700", 
   },
 }));
 

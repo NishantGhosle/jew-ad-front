@@ -52,7 +52,7 @@ const ProductList = ({ products, deleteProduct, editProduct }) => {
     }
     setEditFormData({
       ...editFormData,
-      images: [...editFormData.images, ...files], // Append new files to the current images
+      images: [...editFormData.images, ...files],
     });
   };
 

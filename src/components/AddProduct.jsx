@@ -105,9 +105,6 @@ const AddProduct = ({ addProduct }) => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  {/* <IconButton color="primary">
-                    <CloudUpload />
-                  </IconButton> */}
                 </InputAdornment>
               ),
             }}
@@ -124,7 +121,6 @@ const AddProduct = ({ addProduct }) => {
               <img
               key={idx}
               src={file instanceof File ? URL.createObjectURL(file) : file}
-                // src={URL.createObjectURL(file)}
                 alt={`product-${idx}`}
                 style={{
                   width: "60px",
