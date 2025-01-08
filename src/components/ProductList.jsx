@@ -91,58 +91,67 @@ const ProductList = ({ products, deleteProduct, editProduct }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map((product, index) => (
-              <TableRow key={index}>
-                <TableCell align="center">{index + 1}</TableCell>
-                <TableCell>{product.title}</TableCell>
-                <TableCell align="center">${product.price}</TableCell>
-                <TableCell
-                  sx={{
-                    maxWidth: "200px",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {product.description}
-                </TableCell>
-                <TableCell align="center">
-                  <Box sx={{ display: "flex", gap: 1 }}>
-                    {product.images?.map((image, idx) => (
-                      <Box key={idx} sx={{ position: "relative" }}>
-                        <img
-                          src={image}
-                          alt={`product-${idx}`}
-                          style={{
-                            width: 50,
-                            height: 50,
-                            objectFit: "cover",
-                            borderRadius: 4,
-                          }}
-                        />
+            {products.length > 0 ? (
+              <>
+                {products.map((product, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="center">{index + 1}</TableCell>
+                    <TableCell>{product.title}</TableCell>
+                    <TableCell align="center">${product.price}</TableCell>
+                    <TableCell
+                      sx={{
+                        maxWidth: "200px",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {product.description}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Box sx={{ display: "flex", gap: 1 }}>
+                        {product.images?.map((image, idx) => (
+                          <Box key={idx} sx={{ position: "relative" }}>
+                            <img
+                              src={image}
+                              alt={`product-${idx}`}
+                              style={{
+                                width: 50,
+                                height: 50,
+                                objectFit: "cover",
+                                borderRadius: 4,
+                              }}
+                            />
+                          </Box>
+                        ))}
                       </Box>
-                    ))}
-                  </Box>
-                </TableCell>
-                <TableCell align="center">
-                  <IconButton
-                    color="primary"
-                    size="small"
-                    onClick={() => handleEdit(index)}
-                    sx={{ marginRight: 1 }}
-                  >
-                     <Edit />
-                  </IconButton>
-                  <IconButton
-                    color="error"
-                    size="small"
-                    onClick={() => deleteProduct(index)}
-                  >
+                    </TableCell>
+                    <TableCell align="center">
+                      <IconButton
+                        color="primary"
+                        size="small"
+                        onClick={() => handleEdit(index)}
+                        sx={{ marginRight: 1 }}
+                      >
+                        <Edit />
+                      </IconButton>
+                      <IconButton
+                        color="error"
+                        size="small"
+                        onClick={() => deleteProduct(index)}
+                      >
                         <Delete />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </>
+            ) : (
+                <p >
+                  No products available
+                </p>
+            
+            )}
           </TableBody>
         </Table>
       </TableContainer>

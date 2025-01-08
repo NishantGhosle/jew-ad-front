@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -8,8 +8,10 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { toast } from "react-hot-toast";
 
 const Login = ({ onLogin }) => {
+  const BASE_URL = process.env.REACT_APP_API_URL;
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -17,8 +19,27 @@ const Login = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  const hardcodedUsername = "admin";
-  const hardcodedPassword = "123";
+  const [serverCredentials, setServerCredentials] = useState(null);
+  useEffect(() => {
+    const fetchCredentials = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}api/admin-credentials`); 
+        // const response = await fetch("http://localhost:5000/api/admin-credentials");
+        if (!response.ok) {
+          throw new Error("Failed to fetch credentials");
+        }
+        const data = await response.json();
+     
+        setServerCredentials(data);
+      } catch (err) {
+        console.error("Error fetching credentials:", err);
+        setError("Unable to connect to the server. Please try again later.");
+      } 
+    };
+  
+    fetchCredentials();
+  }, [BASE_URL]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,8 +51,9 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     if (
-      credentials.username === hardcodedUsername &&
-      credentials.password === hardcodedPassword
+      serverCredentials &&
+      credentials.username === serverCredentials.username &&
+      credentials.password === serverCredentials.password
     ) {
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 7);
@@ -45,6 +67,7 @@ const Login = ({ onLogin }) => {
       );
 
       onLogin();
+      toast.success("Logged in Sucessfully!");
     } else {
       setError("Invalid username or password");
     }
