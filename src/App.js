@@ -15,7 +15,8 @@ const App = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/products/`); 
+        const response = await axios.get(`${BASE_URL}api/products`); 
+        // const response = await axios.get(`${BASE_URL}/api/products/`); 
         setProducts(response.data); 
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -23,11 +24,12 @@ const App = () => {
     };
 
     fetchProducts();
-  });
+  },[]);
 
   const addProduct = async (product) => {
     try {
-      const response = await axios.post(`${BASE_URL}/api/products/`, product); 
+      const response = await axios.post(`${BASE_URL}api/products`, product); 
+      // const response = await axios.post(`${BASE_URL}/api/products/`, product); 
       setProducts([...products, response.data.product]);
       toast.success("Product added successfully!");
     } catch (error) {
@@ -43,7 +45,8 @@ const App = () => {
         toast.error("Product ID is missing!");
         return;
       }
-      await axios.delete(`${BASE_URL}/api/products/product/${_id}`); 
+      await axios.delete(`${BASE_URL}api/products/product/${_id}`); 
+      // await axios.delete(`${BASE_URL}/api/products/product/${_id}`); 
       setProducts(products.filter((_, i) => i !== index));
       toast.success("Product deleted successfully!");
     } catch (error) {
@@ -60,7 +63,8 @@ const App = () => {
         toast.error("Product ID is missing or undefined!");
         return;
       }
-      const response = await axios.put(`${BASE_URL}/api/products/${_id}`, updatedProduct); 
+      const response = await axios.put(`${BASE_URL}api/products/${_id}`, updatedProduct); 
+      // const response = await axios.put(`${BASE_URL}/api/products/${_id}`, updatedProduct); 
       const updatedProducts = [...products];
       updatedProducts[index] = response.data; 
       setProducts(updatedProducts);
