@@ -24,7 +24,7 @@ const App = () => {
     };
 
     fetchProducts();
-  },[]);
+  },[BASE_URL]);
 
   const addProduct = async (product) => {
     try {
