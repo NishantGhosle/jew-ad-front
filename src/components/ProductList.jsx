@@ -91,8 +91,6 @@ const ProductList = ({ products, deleteProduct, editProduct }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.length > 0 ? (
-              <>
                 {products.map((product, index) => (
                   <TableRow key={index}>
                     <TableCell align="center">{index + 1}</TableCell>
@@ -145,13 +143,6 @@ const ProductList = ({ products, deleteProduct, editProduct }) => {
                     </TableCell>
                   </TableRow>
                 ))}
-              </>
-            ) : (
-                <p >
-                  No products available
-                </p>
-            
-            )}
           </TableBody>
         </Table>
       </TableContainer>
