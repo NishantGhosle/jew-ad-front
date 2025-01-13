@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const LoginPage = ({ onLogin }) => {
     const [username, setUsername] = useState('');
@@ -13,9 +14,12 @@ const LoginPage = ({ onLogin }) => {
                 username,
                 password,
             });
-            if (response.status === 200) onLogin();
+            if (response.status === 200) {
+                toast.success("Login successful!");
+                onLogin();
+              }
         } catch (err) {
-            setError('Invalid credentials');
+            setError("Invalid credentials");
         }
     };
 
@@ -35,7 +39,7 @@ const LoginPage = ({ onLogin }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                {error && <p className="error">{error}</p>}
+                {error && <p style={{color:"red"}}>{error}</p>}
                 <button type="submit">Login</button>
             </form>
         </div>

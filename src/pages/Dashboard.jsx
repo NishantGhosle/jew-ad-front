@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import toast from 'react-hot-toast';
 
 const Dashboard = ({ onLogout }) => {
   const [products, setProducts] = useState([]);
@@ -15,8 +16,12 @@ const Dashboard = ({ onLogout }) => {
   }, []);
 
   const fetchProducts = async () => {
-    const response = await axios.get("http://localhost:5000/api/products");
-    setProducts(response.data);
+    try {
+      const response = await axios.get("http://localhost:5000/api/products");
+      setProducts(response.data);
+    } catch (err) {
+      toast.error("Failed to fetch products!");
+    }
   };
 
   const handleFormChange = (e) => {
@@ -51,7 +56,7 @@ const Dashboard = ({ onLogout }) => {
       await axios.post("http://localhost:5000/api/products/products", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log("Product added successfully!");
+      toast.success("Product added successfully!");
 
       setFormData({
         title: "",
@@ -61,13 +66,18 @@ const Dashboard = ({ onLogout }) => {
       });
       fetchProducts();
     } catch (err) {
-      console.error(err);
+      toast.error("Failed to add product!");
     }
   };
 
   const handleDeleteProduct = async (id) => {
-    await axios.delete(`http://localhost:5000/api/products/${id}`);
-    fetchProducts();
+    try {
+      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      toast.success("Product deleted successfully!");
+      fetchProducts();
+    } catch (err) {
+      toast.error("Failed to delete product!");
+    }
   };
 
   return (
