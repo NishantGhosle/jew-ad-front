@@ -19,7 +19,6 @@ const Dashboard = ({ onLogout }) => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/products`);
-      // const response = await axios.get("http://localhost:5000/api/products");
       setProducts(response.data);
     } catch (err) {
       toast.error("Failed to fetch products!");
@@ -47,7 +46,6 @@ const Dashboard = ({ onLogout }) => {
     data.append("price", formData.price);
     data.append("description", formData.description);
 
-    // Append images
     formData.images.forEach((file) => {
       if (file instanceof File) {
         data.append("images", file);
@@ -56,7 +54,6 @@ const Dashboard = ({ onLogout }) => {
 
     try {
       await axios.post(`${BASE_URL}/api/products`, data, {
-      // await axios.post("http://localhost:5000/api/products", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Product added successfully!");
@@ -76,7 +73,6 @@ const Dashboard = ({ onLogout }) => {
   const handleDeleteProduct = async (id) => {
     try {
       await axios.delete(`${BASE_URL}/api/products/${id}`);
-      // await axios.delete(`http://localhost:5000/api/products/${id}`);
       toast.success("Product deleted successfully!");
       fetchProducts();
     } catch (err) {
