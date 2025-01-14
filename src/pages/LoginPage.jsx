@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const LoginPage = ({ onLogin }) => {
+    const BASE_URL=process.env.REACT_APP_BACKEND_URL;
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -10,7 +11,8 @@ const LoginPage = ({ onLogin }) => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/admin/login', {
+            const response = await axios.post(`${BASE_URL}/api/admin/login`, {
+            // const response = await axios.post('http://localhost:5000/api/admin/login', {
                 username,
                 password,
             });
