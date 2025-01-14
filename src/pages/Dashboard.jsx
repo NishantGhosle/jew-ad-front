@@ -53,7 +53,7 @@ const Dashboard = ({ onLogout }) => {
     });
 
     try {
-      await axios.post("http://localhost:5000/api/products/products", data, {
+      await axios.post("http://localhost:5000/api/products", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Product added successfully!");
